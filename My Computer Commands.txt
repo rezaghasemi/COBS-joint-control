@@ -1,0 +1,9 @@
+University Labs Computers
+
+# Not Working Yet
+python3 main.py --daylighting True --season heating --blinds False --control_blinds_multi False --random_occupancy True --vav False --multi_agent False --network leaky --control_sat True --load_sat False --load_sat_path '/cshome/rghasemi/Documents/github/COBS-joint-control/baselines' --control_therm False --power_mult 1.0 --therm_mult 0.7 --vis_mult 0.4 --save_root '/cshome/rghasemi/Documents/github/COBS-joint-control/eplus_files/MyRunResults' --end_run 10 --agent_type PPO --reward_type OCTO --eplus_path '/cshome/rghasemi/Documents/github/COBS-joint-control/eplus_files'
+
+
+My Laptop
+
+# Working
