@@ -9,3 +9,4 @@ input.idf
 **/__pycache__/*
 **/.ipynb_checkpoints/*
 plot_results/results/*
+EnergyPlus-9.3.0-baff08990c-Linux-x86_64/
