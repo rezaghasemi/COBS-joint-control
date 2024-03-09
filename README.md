@@ -44,6 +44,12 @@ Make sure to have [EnergyPlus](https://energyplus.net/) 9.3.0 installed on your 
 | torch  | 1.7.1 |
 | eppy | 0.5.53 |
 
+## Errors that might happen and their solutions
+
+Err: "ValueError: IDF file is damaged or not match with your EnergyPlus version."
+Possible Solution: Add '/' to the end of path to --eplus_path. (e.g: "/path/to/the/install/location/of/EnergyPlus/")
+
+
 ## Usage
 Execute the `main.py` by
 ```
