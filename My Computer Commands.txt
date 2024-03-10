@@ -1,3 +1,12 @@
+Default Running code:
+
+python3 main.py --daylighting True --season heating --blinds False --control_blinds_multi False --random_occupancy True --vav False --multi_agent False --network leaky --control_sat True --load_sat False --load_sat_path '<path>' --control_therm False --power_mult 1.0 --therm_mult 0.7 --vis_mult 0.4 --save_root '<path>' --end_run 400 --agent_type PPO --reward_type OCTO --eplus_path '<path>'
+
+
+
+
+
+
 University Labs Computers
 
 # Not Working Yet
@@ -6,6 +15,8 @@ python3 main.py --daylighting True --season heating --blinds False --control_bli
 
 My Laptop
 
-# Not Working :(
+# Working
+
+python3 main.py --daylighting True --season heating --blinds False --control_blinds_multi False --random_occupancy True --vav False --multi_agent False --network leaky --control_sat True --load_sat False --load_sat_path '<path>' --control_therm False --power_mult 1.0 --therm_mult 0.7 --vis_mult 0.4 --save_root '/media/reza/Tempo/github/Individ study/Codes/COBS-joint-control/Results' --end_run 4 --agent_type PPO --reward_type OCTO --eplus_path '/usr/local/EnergyPlus-9-3-0/'
 
 

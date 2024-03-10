@@ -25,4 +25,4 @@ case $SLURM_ARRAY_TASK_ID in
     11) ARGS="--daylighting False --season cooling --blinds True --control_blinds_multi True";;
 esac
 
-python3 main.py $ARGS --random_occupancy $occupancy --vav False --multi_agent False --network $network --control_sat True --load_sat False --load_sat_path '<REMOVED>' --control_therm False --power_mult $power_mult --therm_mult $therm_mult --vis_mult $vis_mult --save_root '<REMOVED>' --end_run 400 --agent_type $agent --reward_type OCTO --eplus_path '<REMOVED>'
+python3 main.py $ARGS --random_occupancy $occupancy --vav False --multi_agent False --network $network --control_sat True --load_sat False --load_sat_path '<REMOVED>' --control_therm False --power_mult $power_mult --therm_mult $therm_mult --vis_mult $vis_mult --save_root '<REMOVED>' --end_run 4 --agent_type $agent --reward_type OCTO --eplus_path '<REMOVED>'
