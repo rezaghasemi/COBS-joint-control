@@ -1,6 +1,10 @@
 #!/usr/bin/bash
 
-AGENTS=('SAC' 'DuelingDQN')
+
+# for testing we just test PPO
+
+AGENTS=('SAC')
+# AGENTS=('SAC' 'DuelingDQN') 
 BLINDS=('True' 'False')
 DLIGHT=('True' 'False')
 SEASON=('heating' 'cooling')

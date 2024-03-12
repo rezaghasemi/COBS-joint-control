@@ -16,7 +16,7 @@ end_run=1
 
 
 occupancy=True
-agent=PPO
+agent=SAC
 network=leaky
 #POWER_MULT=(0.1)
 #THERM_MULT=(0.1)

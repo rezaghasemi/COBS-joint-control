@@ -634,6 +634,7 @@ def save(run_dir, run_num, agents, observations, actions, TESTING, multi_agent, 
     mode = 'a' if run_num % 100 != 0 else 'w'
 
     obs_df.to_csv(os.path.join(run_dir, f'run_{run_num // 100}.csv'), mode=mode, header=mode == 'w')
+    print('\n Here is the place that the data is saved', run_dir)
     with open(os.path.join(run_dir, 'convergence.csv'), mode) as conv_file:
         r_data = obs_df[r].iloc[-1].tolist()
         if len(r_data) > 1:
