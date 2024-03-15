@@ -100,8 +100,18 @@ for folder in tqdm(folders):
 
 
 
-## Reza Hand made 
+## Reza Hand made figure for rewards
 
+algorithms = all_result.keys()
+
+for algorithm in algorithms:
+    for configuration in all_result[algorithm]:
+        plt.plot(range(1, len(configuration)+1), configuration, label=f'{algorithm}')
+        plt.ylabel('Rewards per each run')
+        plt.xlabel('Runs')
+        plt.title(f'{algorithm} algorithm')
+        plt.legend()
+        plt.show()
 
 
 
