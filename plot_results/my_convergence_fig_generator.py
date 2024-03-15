@@ -18,13 +18,12 @@ all_pmv_result = {"PPO": [], "SAC": [], "Branching Dueling DQN": []}
 all_pmv_vio_result = {"PPO": [], "SAC": [], "Branching Dueling DQN": []}
 ###
 folder_counter = 0
+
 folders = list()
 
 for count, folder in enumerate(glob.glob("/media/reza/Tempo/github/COBS-joint-control/Results/rl_results/**")):
-
-### why cooling and seed19 is important?
-   folder_counter += 1
-   folders.append(folder)
+    folder_counter += 1
+    folders.append(folder)
 ## original code is:
    
 #    if "cooling" in folder and "seed19" in folder:

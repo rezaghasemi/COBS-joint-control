@@ -3,7 +3,7 @@
 
 # for testing we just test PPO
 
-AGENTS=('SAC')
+AGENTS=('PPO')
 # AGENTS=('SAC' 'DuelingDQN') 
 BLINDS=('True' 'False')
 DLIGHT=('True' 'False')
