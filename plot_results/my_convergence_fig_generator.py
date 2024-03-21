@@ -26,9 +26,9 @@ for count, folder in enumerate(glob.glob("/media/reza/Tempo/github/COBS-joint-co
 #        folder_counter += 1
 #        folders.append(folder)
 
-print(folder_counter)
+# print(folder_counter)
 
-### why 400? is that the number of runs??
+
 
 results_ = np.zeros((folder_counter, 400))
 
@@ -65,9 +65,9 @@ for folder in tqdm(folders):
         df['pmv count'][df['pmv count'] == 0] = 99999
         df['pmv'] = df['pmv'] / df['pmv count']
         df['pmv violate'][abs(df['pmv']) > 0.7] = 1
-        print(df.head())
+        #print(df.head())
         df = df.groupby(['run']).sum().sort_values(by=['run'])
-        print(df.head())
+        # print(df.head())
         df['light'] = 0
         for i in range(1, 6):
             df['light'] += df[f'Lights Zone {i}']
@@ -75,7 +75,7 @@ for folder in tqdm(folders):
         energy_result.append(df['HVAC Power'].values + df['light'].values)
         pmv_result.append(df['pmv'].values)
         pmv_vio_result.append(df['pmv violate'].values)
-
+        
     result = np.concatenate(result)
     energy_result = np.concatenate(energy_result)
     pmv_result = np.concatenate(pmv_result)
@@ -93,25 +93,27 @@ for folder in tqdm(folders):
     all_pmv_result[name].append(pmv_result)
     all_pmv_vio_result[name].append(pmv_vio_result)
         
-    row += 1
-    print(folder, result.min())
-    print(all_result)
+    # row += 1
+    # print(folder, result.min())
+    # print(all_result)
 
 
 
 
 ## Reza Hand made figure for rewards
 
-algorithms = all_result.keys()
+    algorithms = all_result.keys()
 
-for algorithm in algorithms:
-    for configuration in all_result[algorithm]:
-        plt.plot(range(1, len(configuration)+1), configuration, label=f'{algorithm}')
-        plt.ylabel('Rewards per each run')
-        plt.xlabel('Runs')
-        plt.title(f'{algorithm} algorithm')
-        plt.legend()
-        plt.show()
+    for algorithm in algorithms:
+        for configuration in all_result[algorithm]:
+            plt.plot(range(1, len(configuration)+1), configuration, label=f'{algorithm}')
+            plt.ylabel('Rewards per each run')
+            plt.xlabel('Runs')
+            plt.title(f'{algorithm} algorithm')
+            plt.legend()
+            name_of_figure = folder.split('/')[-1]
+            plt.savefig(f'{name_of_figure}.png')
+            # plt.show()
 
 
 
