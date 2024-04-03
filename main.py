@@ -74,22 +74,28 @@ def setup(args):
     parser.add_argument('--alpha', type=float, default=0.2,
                         help='SAC Param: Temperature parameter alpha determines the relative importance of the entropy '
                              'term against the reward (default: 0.2)')
+
     parser.add_argument('--automatic_entropy_tuning', type=str, default='True', metavar='G',
                         help='SAC Param: Automatically adjust alpha (default: True)')
+
     parser.add_argument('--min_action', type=int, default=-20,
                         help='The lowest valued action term against the reward (default: 20)')
+
     parser.add_argument('--max_action', type=int, default=20,
                         help='The highest valued action term against the reward (default: 65)')
+
     parser.add_argument('--network', type=str, required=True,
                         help='no_relu | leaky | sequential')
 
     # REWARD PARAMS
     parser.add_argument('--reward_type', default='Coil',
                         help='Reward type: Coil | Action | PPD | OCTO (default: Coil)')
+
     parser.add_argument('--reward_param', type=float, default=0.5,
                         help='Relative weight parameter for discomfort vs energy use.'
                              'Different magnitudes for different reward functions are expected.'
                              'Double check the reward objects to see the magnitudes')
+
     parser.add_argument('--power_mult', type=float, help='Required for OCTO reward')
     parser.add_argument('--therm_mult', type=float, help='Required for OCTO reward')
     parser.add_argument('--vis_mult', type=float, help='Required for OCTO reward')
@@ -204,6 +210,7 @@ def setup(args):
     # LOAD FORECASTED STATE
     # =============================
     # Note that the only variable included in the forecasted state is the season
+
     forecasted_path = os.path.join(
         'baselines',
         f'SAT_SP_{season}_blindsNone_setpoint0_daylightingFalse.csv'
@@ -219,9 +226,12 @@ def setup(args):
         # if control_therm_multi:
         #     ThermAction_Test.set_actuators(zones)
 
+
+
     # =============================
     # SETUP REWARD
     # =============================
+
     reward_params = {}
     if (reward_type == 'Action') or (reward_type == 'PPD') or (reward_type == 'Coil'):
         reward_params['occ_weight'] = reward_param
@@ -257,18 +267,21 @@ def setup(args):
     # =============================
     # SET SEED
     # =============================
+
     torch.manual_seed(seed)
     np.random.seed(0)
 
     # =============================
     # SETUP BLINDS, DAYLIGHTING AND SEASON CASES
     # =============================
+
     if season == 'heating':
         reheat = 1
         heat = 1
         cool = 0
         stpt = 15
         run_period = (32, 1991, 1, 1)
+
         if TESTING:
             print('TESTING RUN PERIOD')
             run_period = (1, 1991, 1, 1)
@@ -290,6 +303,7 @@ def setup(args):
 
     # This blinds stuff is only here so exactly replicate the way we were running before adding multiple zone control
     # at somepoint it can be removed
+
     if blinds:
         state_name.append("Blind Angle Zone 1")
         if zone_blinds_multi and control_blinds_multi:
@@ -348,6 +362,7 @@ def setup(args):
         raise ValueError(f'{agent_type} is not an acceptable agent_type')
 
     # Set the number of actions depending on use case
+
     if control_therm:  # Create agents controlling per zone therm and blind
         therm_state_length = state_length
         if multi_agent:
@@ -416,6 +431,12 @@ def setup(args):
             if not os.path.exists(os.path.join(chkpt_pth, f"Main_SAT")):
                 os.makedirs(os.path.join(chkpt_pth, f"Main_SAT"))
         agents.append(sat_agent)
+
+    # Reza investigating
+    #print(agent_params.keys())
+    #for item in agent_params.keys():
+    #    print(item,': ',agent_params[item])
+    #input('press enter to continue.')
 
     # =============================
     # SETUP MODEL
@@ -806,6 +827,8 @@ def run_continuous(ep_model, agents, forecast_state, args):
                     action = agent.agent_step(obs["reward"][i], feeding_state)
 
                 sat_sub_actions, therm_sub_actions, blind_sub_actions = action
+                #print(action)
+                #input('Press Enter to continue ... ')
                 if sat_sub_actions and sat_sub_actions[0] and sat_sub_actions[0][0]:
                     sat_actions.extend(sat_sub_actions)
                 therm_actions.extend(therm_sub_actions)
@@ -824,6 +847,7 @@ def run_continuous(ep_model, agents, forecast_state, args):
 
         # SAVE SAVE RESULT
         actions = (sat_actions_list, therm_actions_list, blind_actions_list)
+ 
         save(base_name, run_num, agents, observations, actions, TESTING, multi_agent, control_sat, load_sat)
 
     print("Done!")

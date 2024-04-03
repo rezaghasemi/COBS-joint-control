@@ -1,0 +1,27 @@
+Main.py
+
+line 135:
+
+What is VAV?
+
+Replace Thermostat to VAV position. In a VAV system, each zone or area of a building is equipped with its own thermostat or temperature sensor. The VAV system regulates the volume of air supplied to each zone based on the temperature setpoint for that zone. When a zone requires more heating or cooling, the VAV system increases the volume of air supplied to that zone to meet the demand.
+
+
+line 192:
+
+what are control_sat and control_therm?
+
+control_term: Create agents controlling per zone therm and blind
+
+
+
+line 225:
+
+What is reward_types (Action, ppd, coil, occ_weight, OCTO)?
+ 
+Line 354:
+
+therm_state_length -= 9 + (blinds and zone_blinds_multi and control_blinds_multi) * 4
+
+
+up to 349

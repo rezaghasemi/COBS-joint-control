@@ -30,11 +30,12 @@ for count, folder in enumerate(glob.glob("/media/reza/Tempo/github/COBS-joint-co
 
 
 
+
 results_ = np.zeros((folder_counter, 400))
 
-
-
+print(folders)
 for folder in tqdm(folders):
+    
     result = list()
     energy_result = list()
     pmv_result = list()
@@ -48,26 +49,27 @@ for folder in tqdm(folders):
             continue
         cols = ['HVAC Power', 'run', 'total reward']
         
-### posibly number of the zones
+# Zones
         for i in range(1, 6):
 
             cols.append(f'Lights Zone {i}')
             cols.append(f'PMV Zone {i}')
             cols.append(f'Occu Zone {i}')
         df = pd.read_csv(f"{folder}/run_{j}.csv", usecols=cols)
-        print(df.head())
+       
         df['pmv'] = 0
         df['pmv count'] = 0
         df['pmv violate'] = 0
+        
         for i in range(1, 6):
             df['pmv'] += abs(df[f'PMV Zone {i}']) * (df[f'Occu Zone {i}'] != 0)
             df['pmv count'] += (df[f'Occu Zone {i}'] != 0)
         df['pmv count'][df['pmv count'] == 0] = 99999
         df['pmv'] = df['pmv'] / df['pmv count']
         df['pmv violate'][abs(df['pmv']) > 0.7] = 1
-        #print(df.head())
+        
         df = df.groupby(['run']).sum().sort_values(by=['run'])
-        # print(df.head())
+        
         df['light'] = 0
         for i in range(1, 6):
             df['light'] += df[f'Lights Zone {i}']
@@ -102,10 +104,12 @@ for folder in tqdm(folders):
 
 ## Reza Hand made figure for rewards
 
-    algorithms = all_result.keys()
 
+    algorithms = [algo for algo in all_result.keys() if all_result[algo]]
+    print(algorithms)
     for algorithm in algorithms:
         for configuration in all_result[algorithm]:
+            plt.clf()
             plt.plot(range(1, len(configuration)+1), configuration, label=f'{algorithm}')
             plt.ylabel('Rewards per each run')
             plt.xlabel('Runs')
@@ -113,7 +117,7 @@ for folder in tqdm(folders):
             plt.legend()
             name_of_figure = folder.split('/')[-1]
             plt.savefig(f'{name_of_figure}.png')
-            # plt.show()
+            plt.show()
 
 
 
